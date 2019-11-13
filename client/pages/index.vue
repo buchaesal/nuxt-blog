@@ -1,7 +1,5 @@
 <template lang="pug">
 .page-home
-  section.intro
-    h1 BLOG 서비스 with Nuxt.js
   section.featured-posts
     postPreview(
       id="1",
@@ -23,7 +21,6 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-@import "~assets/styles/config";
 // 컬러 변수
 $color: #5db4f3
 
