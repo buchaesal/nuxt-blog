@@ -48,5 +48,6 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
+  srcDir: 'client/'
 }
