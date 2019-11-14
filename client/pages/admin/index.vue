@@ -16,6 +16,7 @@ import PostList from '@/components/Posts/PostList';
 import UiButton from '@/components/UI/UiButton';
 
 export default {
+  layout: 'admin',
   components: { PostList, UiButton }
 }
 </script>
