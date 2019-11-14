@@ -3,49 +3,13 @@
   section.create-post-form
     h2.page-title 포스트 생성
     p 새로운 글을 작성합니다.
-    form(@submit.prevent="onSave")
-      ui-input(uniqueId="author", v-model="post.author") 작성자
-      ui-input(uniqueId="title", v-model="post.title") 제목
-      ui-input(uniqueId="thumbnail", v-model="post.thumbnail") 썸네일 이미지 링크
-      ui-input(controlType="textarea", uniqueId="content", v-model="post.content") 콘텐츠
-      ui-button 저장
-      ui-button(
-        type="button",
-        style="margin-left: 10px",
-        styles="cancel",
-        @click="onCancel"
-      ) 취소
 </template>
 
 <script>
-import UiButton from '@/components/UI/UiButton'
-import UiInput from '@/components/UI/UiInput'
+import PostForm from '@/components/Admin/PostForm'
 
 export default {
-  components: {
-    UiButton,
-    UiInput
-  },
-  data() {
-    return {
-      post: {
-        author: '',
-        title: '',
-        thumbnail: '',
-        content: ''
-      }
-    }
-  },
-  methods: {
-    onSave() {
-      // 글 저장 (비동기 통신 후 백엔드 DB에 저장)
-      // 추후 구현
-      console.log(this.post)
-    },
-    onCancel() {
-      this.$router.push('/admin')
-    }
-  }
+  components: { PostForm }
 }
 </script>
 
