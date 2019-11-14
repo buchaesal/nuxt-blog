@@ -1,6 +1,6 @@
 # nuxt-blog
 
-> My stunning Nuxt.js project
+> Nuxt guidebook 튜토리얼을 보며 만드는 blog입니다.
 
 ## Build Setup
 
