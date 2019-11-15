@@ -13,7 +13,6 @@ export default {
    // 비동기로 받아온 데이터를 처리한 후,
   // 페이지 렌더링을 수행
   asyncData(context, callback) {
-    console.log(context);
     // 약 1초 가량 지연 이후 함수 실행
     setTimeout(() => {
       // 오류 처리는 불필요하니 첫번째 인자는 null 설정
