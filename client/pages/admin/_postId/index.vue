@@ -12,6 +12,11 @@ import PostForm from '@/components/Admin/PostForm'
 export default {
   layout: 'admin',
   name: 'SinglePost',
+ head(){
+    return{
+      title: '포스트 수정'
+    }
+  },
   components: { PostForm },
   computed: {
     loadedPost() {

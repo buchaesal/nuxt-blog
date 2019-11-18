@@ -15,6 +15,19 @@
 </template>
 <script>
 export default {
+	 head() {
+    const post = this.loadedPost
+    return {
+      title: post.title,
+      meta: [
+        { 
+          hid: "description", 
+          name: "description", 
+          content: `${post.title} 포스트 페이지 입니다.`, // 보다 적절한 설명 필요
+        }
+      ]      
+    }
+  },
   computed: {
   loadedPost() {
    // 라우트 매개변수 id 값 (예: 'Nuxt.js 프레임워크')

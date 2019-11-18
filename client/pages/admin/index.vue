@@ -18,6 +18,11 @@ import UiButton from '@/components/UI/UiButton'
 export default {
   layout: 'admin',
   components: { PostList, UiButton },
+    head(){
+    return{
+      title: '관리자'
+    }
+  },
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts

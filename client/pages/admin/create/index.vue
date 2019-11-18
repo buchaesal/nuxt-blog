@@ -14,6 +14,11 @@ import PostForm from '@/components/Admin/PostForm'
 export default {
   layout: 'admin',
   components: { PostForm },
+  head(){
+    return{
+      title: '포스트 작성'
+    }
+  },
   methods: {
     // 커스텀 이벤트 수신 메서드 정의
     onSubmitted(newPost) {
