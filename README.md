@@ -2,6 +2,8 @@
 
 > Nuxt guidebook 튜토리얼을 보며 만드는 blog입니다.
 
+## Nuxt.js + Firebase
+
 ## Build Setup
 
 ``` bash
