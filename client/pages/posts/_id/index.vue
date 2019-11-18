@@ -15,22 +15,12 @@
 </template>
 <script>
 export default {
-  asyncData({ route }, callback) {
-    setTimeout(() => {
-      callback(null, {
-        // 1초 지연된 데이터 로드 시뮬레이션
-        loadedPost: {
-          id: '1',
-          title: '빅 데이터',
-          author: '야무(yamoo9)',
-          updatedDate: new Date().toLocaleString(),
-          thumbnail: '//goo.gl/mJ5Vsy',
-          content:
-            '빅 데이터란? 기존 데이터베이스 관리도구의 능력을 넘어서는 대량의 정형 또는 비정형 데이터 집합을 포함한 데이터로부터 가치를 추출하고 결과를 분석하는 기술이다.'
-        }
-      })
-    }, 1000)
+  computed: {
+  loadedPost() {
+    const id = this.$route.params.id - 1
+    return this.$store.getters.loadedPosts[id]
   }
+}
 }
 </script>
 <style lang="sass" scoped>

@@ -10,38 +10,12 @@ import PostList from '@/components/Posts/PostList';
 
 export default {
   components: { PostList },
-  asyncData(context) {
-    // Promise 객체 반환
-    return new Promise((resolve, reject) => {
-      // 지연된 렌더링 시뮬레이션
-      setTimeout(() => {
-        // 성공 시, 처리
-        resolve({
-          // 비동기 처리 후, 데이터 전달
-          loadedPosts: [
-            {
-              id: '1',
-              title: '빅 데이터',
-              thumbnail: '//goo.gl/mJ5Vsy',
-              content:
-                '빅 데이터란? 기존 데이터베이스 관리도구의 능력을 넘어서는 대량의 정형 또는 비정형 데이터 집합을 포함한 데이터로부터 가치를 추출하고 결과를 분석하는 기술이다.'
-            },
-            {
-              id: '2',
-              title: '머신 러닝',
-              thumbnail: '//goo.gl/HoiVkE',
-              content:
-                '머신 러닝은 인공 지능의 한 분야로, 컴퓨터가 학습할 수 있도록 하는 알고리즘과 기술을 개발하는 분야를 말한다.'
-            }
-          ]
-        })
-      }, 1000)
-      // 실패 시, 처리
-      // reject(new Error())
-    })
-      .then(data => data)
-      // context.error를 통해 오류 페이지 이동
-      .catch(e => context.error(e))
+  computed: {
+    // loadedPosts 속성
+    loadedPosts() {
+      // 스토어 객체 게터를 사용해 저장된 loadedPosts 읽기
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
