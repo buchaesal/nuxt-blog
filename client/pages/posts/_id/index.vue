@@ -17,8 +17,12 @@
 export default {
   computed: {
   loadedPost() {
-    const id = this.$route.params.id - 1
-    return this.$store.getters.loadedPosts[id]
+   // 라우트 매개변수 id 값 (예: 'Nuxt.js 프레임워크')
+      const id = this.$route.params.id
+      // 스토어의 loadedPosts 배열에서 
+      // 포스트 타이틀과 라우트 매개변수 id 값이 일치하는 
+      // 아이템을 찾아(find) 반환
+      return this.$store.getters.loadedPosts.find(post => post.title === id)
   }
 }
 }

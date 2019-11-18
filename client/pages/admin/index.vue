@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import PostList from '@/components/Posts/PostList';
-import UiButton from '@/components/UI/UiButton';
+import PostList from '@/components/Posts/PostList'
+import UiButton from '@/components/UI/UiButton'
 
 export default {
   layout: 'admin',
