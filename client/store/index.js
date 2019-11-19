@@ -1,13 +1,5 @@
 // Vuex 패키지 불러오기
 import Vuex from 'vuex'
-import preAxios from 'axios'
-import https from 'https'
-
-const axios = preAxios.create({
-    httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-    })
-})
 
 // nuxt.config.js 파일의 env 속성 공유
 const api = process.env.baseUrl
@@ -36,10 +28,15 @@ const createStore = () => {
     },
     // 액션(비동기 처리 ⟹ 쓰기 커밋)
     actions: {
-        async nuxtServerInit({commit}, context) {
+        async nuxtServerInit({commit}, { app }) {
           try {
-            // API 주소 설정
-            const { data } = await axios.get(api + '/posts.json')
+            // nuxtServerInit 에서는
+            // axios.get() -> app.$axios.$get()
+            // nuxt.config.js에서 baseURL 설정했기 때문에
+            // 상대 경로만 설정하면 되고, 통신 결과는 데이터만
+            // 추출되기 때문에 res.data가 아닌, data를
+            // 바로 사용할 수 있다.
+            const data = await app.$axios.$get('/posts.json')
             const postsList = []
             for (let key in data) {
               postsList.push({ ...data[key], id: key })
@@ -55,27 +52,27 @@ const createStore = () => {
           createPost({ commit }, createdPost) {
             createdPost.createdDate = new Date().toLocaleString()
             createdPost.updatedDate = createdPost.createdDate
-            // Firebase 데이터베이스와 통신
-            return axios
-              .post(api + '/posts.json', createdPost)
-              .then(res => {
-                // 통신이 성공하면 뮤테이션에 커밋
-                commit('createPost', { ...createdPost, id: res.data.name })
-              })
-              .catch(e => console.error(e))
+          // actions 메서드 내부에서는 this.$axios를 사용
+          // baseURL 설정에 따라 상대 경로만 설정
+          // res.data가 아닌, data 바로 사용
+          return this.$axios
+          .$post('/posts.json', createdPost)
+          .then(data => {
+            commit('createPost', { ...createdPost, id: data.name })
+          })
+          .catch(e => console.error(e))
           },
           updatePost({ commit }, updatedPost) {
             updatedPost.updatedDate = new Date().toLocaleString()
-            return axios
-              .put(
-                // API 주소 설정
-              api + `/posts/${updatedPost.id}.json`,
-              updatedPost
-              )
-              .then(res => {
-                commit('updatePost', updatedPost)
-              })
-              .catch(e => console.error(e))
+           // actions 메서드 내부에서는 this.$axios를 사용
+          // baseURL 설정에 따라 상대 경로만 설정
+          // res.data가 아닌, data 바로 사용
+          return this.$axios
+          .$put(`/posts/${updatedPost.id}.json`, updatedPost)
+          .then(data => {
+            commit('updatePost', updatedPost)
+          })
+          .catch(e => console.error(e))
           }
     },
     // 읽기

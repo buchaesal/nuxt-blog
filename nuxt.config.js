@@ -36,7 +36,8 @@ export default {
   */
   plugins: [
     { src: '~/plugins/notifications-ssr', mode: 'server' },
-    { src: '~/plugins/notifications-client', mode: 'client' }
+    { src: '~/plugins/notifications-client', mode: 'client' },
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -47,8 +48,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    'nuxt-typescript'
+    'nuxt-typescript',
+    '@nuxtjs/axios'
   ],
+  axios: {
+    // 모듈 설정
+    baseURL: process.env.BASE_URL || 'https://vuejs-http-9bdb4.firebaseio.com'
+  },
   /*
   ** Build configuration
   */
@@ -75,7 +81,7 @@ export default {
       mode: 'out-in',
       beforeEnter(el) {
         // el => 페이지 컴포넌트 DOM 객체
-        console.log('페이지 트랜지션 진입', el)
+        // console.log('페이지 트랜지션 진입', el)
       }
     },
     // 레이아웃 트랜지션 설정
