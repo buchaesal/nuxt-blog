@@ -8,6 +8,7 @@
       :nav-links="navLinks"
       :display="displayMenu"
       @onClose="closeMenu"/>
+         <notifications group="admin-noti"/>
     <div class="layout-admin container">
       <h1 class="admin-title">관리자 페이지</h1>
       <nuxt/>

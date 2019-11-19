@@ -35,7 +35,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/Common.js'
+    { src: '~/plugins/notifications-ssr', mode: 'server' },
+    { src: '~/plugins/notifications-client', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
