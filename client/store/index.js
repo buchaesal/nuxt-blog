@@ -1,13 +1,16 @@
 // Vuex 패키지 불러오기
 import Vuex from 'vuex'
-import axios from 'axios'
+import preAxios from 'axios'
 import https from 'https'
 
-const axiosInstance = axios.create({
+const axios = preAxios.create({
     httpsAgent: new https.Agent({
         rejectUnauthorized: false
     })
 })
+
+// nuxt.config.js 파일의 env 속성 공유
+const api = process.env.baseUrl
 
 // 스토어 생성 함수 정의
 const createStore = () => {
@@ -34,25 +37,27 @@ const createStore = () => {
     // 액션(비동기 처리 ⟹ 쓰기 커밋)
     actions: {
         async nuxtServerInit({commit}, context) {
-            // axios를 통해 Firebase 데이터베이스에 데이터 요청
-            await axiosInstance.get('https://vuejs-http-9bdb4.firebaseio.com/posts.json')
-                 // 응답 받은 데이터 출력
-                 .then(({data}) => {
-                    const postsList = []
-                    for (let key in data) {
-                       // Firebase 데이터베이스의 데이터 식별자를 id 값으로 저장
-                        postsList.push({ ...data[key], id: key })
-                    }
-                    commit('setPosts', postsList)
-                  })
-                 .catch(e => console.error(e))
+          try {
+            // API 주소 설정
+            const { data } = await axios.get(api + '/posts.json')
+            const postsList = []
+            for (let key in data) {
+              postsList.push({ ...data[key], id: key })
+            }
+            commit('setPosts', postsList)
+          } catch (e) {
+            console.error(e)
+          }
+          },
+          setPosts({ commit }, posts) {
+            commit('setPosts', posts)
           },
           createPost({ commit }, createdPost) {
             createdPost.createdDate = new Date().toLocaleString()
             createdPost.updatedDate = createdPost.createdDate
             // Firebase 데이터베이스와 통신
             return axios
-              .post('https://vuejs-http-9bdb4.firebaseio.com/posts.json', createdPost)
+              .post(api + '/posts.json', createdPost)
               .then(res => {
                 // 통신이 성공하면 뮤테이션에 커밋
                 commit('createPost', { ...createdPost, id: res.data.name })
@@ -63,8 +68,9 @@ const createStore = () => {
             updatedPost.updatedDate = new Date().toLocaleString()
             return axios
               .put(
-                `https://vuejs-http-9bdb4.firebaseio.com/posts/${updatedPost.id}.json`,
-                updatedPost
+                // API 주소 설정
+              api + `/posts/${updatedPost.id}.json`,
+              updatedPost
               )
               .then(res => {
                 commit('updatePost', updatedPost)

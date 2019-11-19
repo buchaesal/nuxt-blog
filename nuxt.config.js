@@ -16,6 +16,9 @@ export default {
       { rel: 'stylesheet', href: "//fonts.googleapis.com/css?family=Noto+Sans+KR" }
     ]
   },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://vuejs-http-9bdb4.firebaseio.com'
+  },
   /*
   ** Customize the progress-bar color
   */
