@@ -17,6 +17,7 @@ import UiButton from '@/components/UI/UiButton'
 
 export default {
   layout: 'admin',
+  middleware: 'auth',
   components: { PostList, UiButton },
     head(){
     return{
@@ -26,6 +27,11 @@ export default {
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts
+    }
+  },
+  method:{
+    logout(){
+      this.$store.state.token = null
     }
   }
 }

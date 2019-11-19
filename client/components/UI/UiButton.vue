@@ -27,6 +27,7 @@ $cancel-color: #d43c6d !default
   cursor: pointer
   border: none
   border-radius: 4px
+  margin-right: 10px
   padding: 0.6em 1.2em
   background: rgba(darken($point-color, 5%), 0.7)
   color: #fff

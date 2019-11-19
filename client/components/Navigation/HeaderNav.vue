@@ -1,23 +1,21 @@
-<template lang="pug">
-  header.page-header(ref="pageHeader")
-    h1.page-brand
-      nuxt-link(to="/") NUXT BLOG
-    .spacer
-    //- 모바일 내비게이션 토글 버튼
-    button.button.nav-side-toggle(
-      type="button",
-      aria-label="메뉴 토글 버튼"
-      @click="$emit('onNavMenuToggle')"
-    )
-      span.bar(v-for="bar in bars", :key="bar")
-    //- 페이지 내비게이션
-    nav.page-nav
-      ul.page-nav-list
-        li.page-nav-item(
-          v-for="(link, index) in navLinks",
-          :key="index"
-        )
-          nuxt-link(:to="link.route") {{ link.text }}
+<template>
+<header class="page-header" ref="pageHeader">
+  <h1 class="page-brand">
+    <nuxt-link to="/">NUXT BLOG</nuxt-link>
+  </h1>
+  <div class="spacer"></div>
+    <button class="button nav-side-toggle" 
+    type="button" 
+    aria-label="메뉴 토글 버튼"
+    @click="$emit('onNavMenuToggle')"><span class="bar" v-for="bar in bars" :key="bar"></span></button>
+    <nav class="page-nav">
+      <ul class="page-nav-list">
+        <li class="page-nav-item" v-for="(link, index) in navLinks" :key="index">
+          <nuxt-link :to="link.route">{{ link.text }}</nuxt-link>
+        </li>
+      </ul>
+    </nav>
+</header>
 </template>
 <script>
 export default {

@@ -19,7 +19,6 @@ import HeaderNav from '@/components/Navigation/HeaderNav'
 import HeaderNavMenu from '@/components/Navigation/HeaderNavMenu'
 
 export default {
-  middleware: 'logger',
   // 컴포넌트 등록
   components: { HeaderNav, HeaderNavMenu },
   // 컴포넌트에 전달한 데이터 정의
@@ -31,7 +30,7 @@ export default {
       navLinks: [
         { route: '/posts', text: '블로그' },
         { route: '/about', text: '서비스 소개' },
-        { route: '/admin', text: '관리자' }
+        { route: '/admin', text: '관리자'}
       ]
     }
   },
