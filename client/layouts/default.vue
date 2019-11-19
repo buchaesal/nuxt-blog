@@ -19,6 +19,7 @@ import HeaderNav from '@/components/Navigation/HeaderNav'
 import HeaderNavMenu from '@/components/Navigation/HeaderNavMenu'
 
 export default {
+  middleware: 'logger',
   // 컴포넌트 등록
   components: { HeaderNav, HeaderNavMenu },
   // 컴포넌트에 전달한 데이터 정의
