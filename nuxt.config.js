@@ -66,5 +66,19 @@ export default {
         component: resolve(__dirname, src + '/pages/404.vue')
       })
     }
+  },
+    // 페이지 트랜지션 설정
+    transition: {
+      name: 'fade',
+      mode: 'out-in',
+      beforeEnter(el) {
+        // el => 페이지 컴포넌트 DOM 객체
+        console.log('페이지 트랜지션 진입', el)
+      }
+    },
+    // 레이아웃 트랜지션 설정
+  layoutTransition: {
+    name: 'layout',
+    mode: 'out-in'
   }
 }
