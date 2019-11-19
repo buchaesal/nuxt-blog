@@ -1,4 +1,6 @@
 
+const src = 'client'
+
 export default {
   mode: 'universal',
   /*
@@ -55,5 +57,14 @@ export default {
     extend (config, ctx) {
     }
   },
-  srcDir: 'client/'
+  srcDir: src,
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'pageNotFound',
+        path: '*',
+        component: resolve(__dirname, src + '/pages/404.vue')
+      })
+    }
+  }
 }

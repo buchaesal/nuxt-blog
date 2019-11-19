@@ -15,6 +15,17 @@
 </template>
 <script>
 export default {
+	data(){
+		return{
+			defaultPost : {
+				title: '',
+				author: '',
+				updatedDate: null,
+				thumbnail: '',
+				content: ''
+			}
+		}
+	},
 	 head() {
     const post = this.loadedPost
     return {
@@ -34,10 +45,10 @@ export default {
       const id = this.$route.params.id
       // 스토어의 loadedPosts 배열에서 
       // 포스트 타이틀과 라우트 매개변수 id 값이 일치하는 
-      // 아이템을 찾아(find) 반환
-      return this.$store.getters.loadedPosts.find(post => post.title === id)
+	  // 아이템을 찾아(find) 반환
+	  return this.$store.getters.loadedPosts.find(post => post.title === id)
+ 	 }
   }
-}
 }
 </script>
 <style lang="sass" scoped>
