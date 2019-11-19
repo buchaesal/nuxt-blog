@@ -36,24 +36,29 @@ export default {
   },
    methods: {
     onSubmit() {
-      const API_KEY = process.env.APIKey // API 키 필요
-      // 로그인 상태(isLogin)에 따라 Firebase에 요청하는 Endpoint 경로를 변경
-      // 가입 인증일 경우(비 로그인): signupNewUser
-      // 로그인 인증일 경우: verifyPassword
-      const authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/${
-      !this.isLogin ? 'signupNewUser' : 'verifyPassword'
-      }?key=${API_KEY}`
-
-
-      this.$axios.$post(authURL,
-        {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true
-        }
-      )
-      .then(result => console.log(result))
-      .catch(e => console.error(e))
+    // 스토어에 authUser 액션을 실행시키도록 알림
+    // 로그인 상태, 로그인 정보(이메일, 패스워드)를 페이로드로 전달
+    this.$store
+      .dispatch('authUser', {
+        isLogin: this.isLogin,
+        email: this.email,
+        password: this.password
+      })
+      // 인증이 완료되면 로그인 성공을 알림 창으로 표시한 후,
+      // 관리자 메인 페이지로 이동
+      .then(() => {
+        this.$notify({
+          group: 'admin-noti',
+          title: '로그인 성공!',
+          type: 'success',
+          text: '사용자 로그인에 성공했습니다.',
+          duration: 2000,
+          speed: 400
+        })
+        setTimeout(() => {
+          this.$router.push('/admin')
+        }, 1000)
+      })
     }
   }
 }

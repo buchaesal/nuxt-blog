@@ -9,7 +9,10 @@ const createStore = () => {
   // Vuex.Store 객체 생성 반환
   return new Vuex.Store({
     // 상태(데이터)
-    state: { loadedPosts: [] },
+    state: { 
+             loadedPosts: [],
+             token: null 
+            },
     // 쓰기(동기 처리)
     mutations: {
       setPosts(state, posts) {
@@ -24,6 +27,9 @@ const createStore = () => {
           post => post.id === updatedPost.id
         )
         state.loadedPosts[idx] = updatedPost
+      },
+      setToken(state, token) {
+        state.token = token
       }
     },
     // 액션(비동기 처리 ⟹ 쓰기 커밋)
@@ -49,36 +55,66 @@ const createStore = () => {
           setPosts({ commit }, posts) {
             commit('setPosts', posts)
           },
-          createPost({ commit }, createdPost) {
+          createPost({ commit, getters }, createdPost) {
             createdPost.createdDate = new Date().toLocaleString()
             createdPost.updatedDate = createdPost.createdDate
           // actions 메서드 내부에서는 this.$axios를 사용
           // baseURL 설정에 따라 상대 경로만 설정
           // res.data가 아닌, data 바로 사용
           return this.$axios
-          .$post('/posts.json', createdPost)
+          // getters.token 값을 auth 에 설정
+          .$post(`/posts.json?auth=${getters.token}`, createdPost)
           .then(data => {
             commit('createPost', { ...createdPost, id: data.name })
           })
           .catch(e => console.error(e))
           },
-          updatePost({ commit }, updatedPost) {
+          updatePost({ commit, getters }, updatedPost) {
             updatedPost.updatedDate = new Date().toLocaleString()
            // actions 메서드 내부에서는 this.$axios를 사용
           // baseURL 설정에 따라 상대 경로만 설정
           // res.data가 아닌, data 바로 사용
           return this.$axios
-          .$put(`/posts/${updatedPost.id}.json`, updatedPost)
+          // getters.token 값을 auth 에 설정
+          .$put(`/posts/${updatedPost.id}.json?auth=${getters.token}`, updatedPost)
           .then(data => {
             commit('updatePost', updatedPost)
           })
           .catch(e => console.error(e))
+          },
+          authUser({ commit }, authData) {
+  
+            const API_KEY = process.env.APIKey
+          
+            // this.isLogin ⟹ authData.isLogin 변경
+            const authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/${
+              !authData.isLogin ? 'signupNewUser' : 'verifyPassword'
+            }?key=${API_KEY}`
+          
+            // axios 프로미스(Promise) 반환
+            return this.$axios
+              .$post(authURL, {
+                // this.email ⟹ authData.email 변경
+                email: authData.email,
+                // this.password ⟹ authData.password 변경
+                password: authData.password,
+                returnSecureToken: true
+              })
+              .then(res => {
+                // 통신에 성공하면 토큰을 저장하는 setToken 뮤테이션 메서드를 실행
+                commit('setToken', res.idToken)
+              })
+              .catch(e => console.error(e))
+              
           }
     },
     // 읽기
     getters: {
       loadedPosts(state) {
         return state.loadedPosts
+      },
+      token(state) {
+        return state.token
       }
     }
   })
