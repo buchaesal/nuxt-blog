@@ -19,7 +19,8 @@ export default {
     ]
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://vuejs-http-9bdb4.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://vuejs-http-9bdb4.firebaseio.com',
+    APIKey: 'AIzaSyC56uygjiorlAR8ewjo0ku3-bL3-yujPe0'
   },
   /*
   ** Customize the progress-bar color
