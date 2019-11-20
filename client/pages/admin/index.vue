@@ -53,7 +53,7 @@ export default {
   letter-spacing: -0.03em
 
 .posts
-	margin-top: 30px
+    margin-top: 30px
 
 p
   margin-top: 0

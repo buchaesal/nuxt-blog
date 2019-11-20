@@ -96,7 +96,7 @@ export default {
     color: #fff
 
 .spacer
-	flex: 1
+    flex: 1
 
 // 모바일 내비게이션 토글 버튼
 .button.nav-side-toggle
@@ -106,7 +106,7 @@ export default {
   flex-direction: column
   justify-content: space-evenly
   padding: 8px 12px
-  height: 80%;
+  height: 80%
   border: 1px solid rgba(#fff, 0.3)
   transition: all 0.4s ease
   background: none

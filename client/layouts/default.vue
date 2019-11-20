@@ -55,6 +55,6 @@ export default {
   height: 200px
   margin-bottom: 20px
   padding: 30px
-  background: darken($color, 40%) url("~assets/images/intro-bg.jpg") center
+  background: $header-color
   background-size: cover
 </style>
