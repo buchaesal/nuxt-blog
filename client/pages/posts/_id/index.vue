@@ -95,7 +95,6 @@ export default {
 
 	.post-feedback
 		width: 60%
-		margin:
 		top: 30px
 		right: auto
 		left: auto

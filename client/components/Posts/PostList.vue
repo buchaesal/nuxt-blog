@@ -1,15 +1,15 @@
-<template lang="pug">
-section.post-list
-	// v-for 디렉티브를 사용해 컴포넌트 순환 처리
-	post-preview(
-		v-for="post in posts",
-		:key="post.id",
-		:id="post.id",
-		:isAdmin="isAdmin",
-		:title="post.title",
-		:thumbnail="post.thumbnail",
-		:content="post.content"
-	)
+<template>
+<section class="post-list">
+<post-preview 
+v-for="post in posts" 
+:key="post.id" 
+:id="post.id" 
+:isAdmin="isAdmin" 
+:title="post.title" 
+:thumbnail="post.thumbnail" 
+:content="post.content">
+</post-preview>
+</section>
 </template>
 
 <script>
