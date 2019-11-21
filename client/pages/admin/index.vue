@@ -28,11 +28,6 @@ export default {
     loadedPosts() {
       return this.$store.getters.loadedPosts
     }
-  },
-  method:{
-    logout(){
-      this.$store.state.token = null
-    }
   }
 }
 </script>

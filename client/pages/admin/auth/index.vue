@@ -12,12 +12,12 @@
     .button-group(role="group")
       ui-button(style="margin-right: 10px")
         | {{ isLogin ? '로그인' : '회원가입' }}
-      ui-button(
-        type="button",
-        styles="inverted",
-        @click="isLogin = !isLogin"
-      )
-        | {{ '"' + (isLogin ? '회원가입' : '로그인') + '" 폼으로 변경' }}
+      //- ui-button(
+      //-   type="button",
+      //-   styles="inverted",
+      //-   @click="isLogin = !isLogin"
+      //- )
+      //-   | {{ '"' + (isLogin ? '회원가입' : '로그인') + '" 폼으로 변경' }}
 </template>
 
 <script>
@@ -25,7 +25,6 @@ import UiInput from '@/components/UI/UiInput'
 import UiButton from '@/components/UI/UiButton'
 
 export default {
-  layout: 'admin',
   components: { UiInput, UiButton },
   data() {
     return {
@@ -47,7 +46,8 @@ export default {
       // 인증이 완료되면 로그인 성공을 알림 창으로 표시한 후,
       // 관리자 메인 페이지로 이동
       .then(() => {
-        this.$notify({
+        if(this.$store.getters.token){
+         this.$notify({
           group: 'admin-noti',
           title: '로그인 성공!',
           type: 'success',
@@ -55,6 +55,17 @@ export default {
           duration: 2000,
           speed: 400
         })
+        }else{
+           this.$notify({
+          group: 'admin-noti',
+          title: '로그인 실패!',
+          type: 'error',
+          text: '사용자 로그인에 실패했습니다.',
+          duration: 2000,
+          speed: 400
+        })
+        }
+       
         setTimeout(() => {
           this.$router.push('/admin')
         }, 1000)

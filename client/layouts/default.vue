@@ -5,11 +5,14 @@
     <!-- 내비게이션 컴포넌트 -->
     <header-nav
       :nav-links="navLinks"
+      :isAdmin="isAdmin"
       @onNavMenuToggle="toggleMenu"/>
     <header-nav-menu
       :nav-links="navLinks"
       :display="displayMenu"
+      :isAdmin="isAdmin"
       @onClose="closeMenu"/>
+    <notifications group="admin-noti"/>
     <nuxt/>
   </div>
 </template>
@@ -29,9 +32,10 @@ export default {
       // 메뉴 아이템
       navLinks: [
         { route: '/posts', text: '블로그' },
-        { route: '/about', text: '서비스 소개' },
+        { route: '/about', text: '소개' },
         { route: '/admin', text: '관리자'}
-      ]
+      ],
+      isAdmin: false
     }
   },
   // 컴포넌트의 커스텀 이벤트 수신 시, 처리 메서드 정의

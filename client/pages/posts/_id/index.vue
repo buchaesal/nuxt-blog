@@ -10,7 +10,7 @@
     section.post-feedback
       p
         | 해당 포스트에 대해 궁금한 점이 있으면
-        a(href="mailto:yamoo9@naver.com") yamoo9@naver.com
+        a(href="mailto:eks4116@gmail.com") eks4116@naver.com
         | 로 문의주세요.
 </template>
 <script>

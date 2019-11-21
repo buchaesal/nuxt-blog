@@ -3,12 +3,13 @@
     <section class="intro"/>
     <header-nav
       :nav-links="navLinks"
+      :isAdmin="isAdmin"
       @onNavMenuToggle="toggleMenu"/>
     <header-nav-menu
       :nav-links="navLinks"
       :display="displayMenu"
+      :isAdmin="isAdmin"
       @onClose="closeMenu"/>
-         <notifications group="admin-noti"/>
     <div class="layout-admin container">
       <h1 class="admin-title">관리자 페이지</h1>
       <nuxt/>
@@ -31,7 +32,8 @@ export default {
       navLinks: [
         { route: '/posts', text: '블로그' },
         { route: '/about', text: '서비스 소개' }
-      ]
+      ],
+      isAdmin: true
     }
   },
   methods: {

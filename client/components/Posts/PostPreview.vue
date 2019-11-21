@@ -38,9 +38,9 @@ export default {
     },
     ellipseContent() {
       const ellipseText =
-        this.content.length < 65
+        this.content.length < 50
           ? this.content
-          : this.content.slice(0, 60) + '...'
+          : this.content.slice(0, 40) + '...'
       return ellipseText
     }
   }
@@ -69,7 +69,7 @@ a
 
 .post-thumbnail
   width: 100%
-  height: 150px
+  height: 260px
   margin: 0
   background-position: center
   background-size: cover
@@ -84,9 +84,9 @@ a
   padding: 10px
   text-align: center
 
-@media (min-width: 768px)
+@media (min-width: 500px)
   .post-preview
-    flex: 0 0 45%
+    flex: 0 0 23%
     margin:
       left: 10px
       right: 10px

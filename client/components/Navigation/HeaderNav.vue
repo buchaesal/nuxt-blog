@@ -1,7 +1,7 @@
 <template>
 <header class="page-header" ref="pageHeader">
   <h1 class="page-brand">
-    <nuxt-link to="/">NUXT BLOG</nuxt-link>
+    <nuxt-link to="/">BLOG</nuxt-link>
   </h1>
   <div class="spacer"></div>
     <button class="button nav-side-toggle" 
@@ -13,6 +13,7 @@
         <li class="page-nav-item" v-for="(link, index) in navLinks" :key="index">
           <nuxt-link :to="link.route">{{ link.text }}</nuxt-link>
         </li>
+        <li class="page-nav-item" v-show="isAdmin"><a href="#" @click="logout">로그아웃</a></li>
       </ul>
     </nav>
 </header>
@@ -25,9 +26,13 @@ export default {
       default: () => {
         return []
       }
+    },
+    isAdmin:{
+      type: Boolean
     }
   },
    mounted() {
+     console.log(this.isAdmin)
     // 마운트 된 시점에서 함수 실행
     this.header = this.$refs.pageHeader;
     this.headerTop = this.header.offsetTop;
@@ -53,8 +58,12 @@ export default {
       this.scrolled
         ? header.classList.add('scrolled')
         : header.classList.remove('scrolled')
+    },
+     logout(){
+      this.$store.state.token = null
+      this.$router.push('/')
     }
-  },
+  }
 }
 </script>
 <style lang="sass" scoped>
