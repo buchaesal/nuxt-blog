@@ -21,7 +21,7 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/vuetify": "^1.9.0",
     "nuxt-typescript": "^0.11.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.20.1",
